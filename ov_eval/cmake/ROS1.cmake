@@ -40,6 +40,10 @@ list(APPEND thirdparty_libraries
 # See this stackoverflow answer: https://stackoverflow.com/a/11217008/7718197
 if (NOT catkin_FOUND OR NOT ENABLE_ROS)
 
+    find_package(OpenCV REQUIRED)
+    include_directories(${OpenCV_INCLUDE_DIRS})
+    list(APPEND thirdparty_libraries ${OpenCV_LIBRARIES})
+
     message(STATUS "MANUALLY LINKING TO OV_CORE LIBRARY....")
     file(GLOB_RECURSE OVCORE_LIBRARY_SOURCES "${CMAKE_SOURCE_DIR}/../ov_core/src/*.cpp")
     list(FILTER OVCORE_LIBRARY_SOURCES EXCLUDE REGEX ".*test_profile\\.cpp$")
